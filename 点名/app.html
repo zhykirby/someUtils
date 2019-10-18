@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点名</title>
+    <link href="./bootstrap.css" rel='stylesheet'>
+    <style>
+        body{margin: 0;padding: 0;}
+        #bg{display: flex;justify-content: center;}
+        .main{width: 600px;display: flex;align-self: center;box-sizing: content-box;padding: 100px;height: 400px;flex-wrap: wrap;}
+        .content{width: 600px;height: 400px;border: 2px dashed blue;}
+        #rdm{margin: 20px auto;}
+    </style>
+</head>
+<body>
+    <div id='bg'>
+        <div class="main">
+            <div class="content">
+
+            </div>
+            <button id='rdm' type="button" class="btn btn-primary">点击生成随机数</button>
+        </div>
+    </div>
+
+
+    <script>
+        const btn = document.getElementById('rdm')
+        const content = document.getElementsByClassName('content')[0]
+        btn.addEventListener('click', () => {
+            let rdm = Math.floor(Math.random()*49) + 1
+            content.innerHTML = `<div style='width:100px;height:100px;margin: 150px 250px;font-size: 50px;'>${rdm}</div>`
+        })
+    </script>    
+</body>
+</html>
