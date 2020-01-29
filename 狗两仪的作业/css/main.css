@@ -1,0 +1,43 @@
+.hwd{
+    width: 100%;
+    height: 342px;
+    margin: 0 auto;
+}
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.margin0{
+    margin-top: 0px;
+}
+.marginb{
+    margin-bottom: 40px;
+}
+.lsyjt{
+    width: 100%;
+    height: 200px;
+}
+.lsyj{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.ts{
+    margin:60px 0 20px 0;font-size:2rem;
+    text-decoration: underline;
+    color:red;
+}
+.bt1s{
+    border-top: 1px solid #e5e5e5;
+}
+.lbt{
+    width: 100%;
+    height: 240px;
+    object-fit: fill;
+}
+.lbtOutter{
+    height: 240px;
+}
+.fill{
+    object-fit: fill;
+}
