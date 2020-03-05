@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    fetch('https://free-api.heweather.net/s6/weather/now?location=beijing&key=89f0c6927c5045a59db2bcc0d6107c6b')
+        .then((response) => {
+            return response.json();
+        })
+        .then(res => {
+            let now = res.HeWeather6[0].now;
+            console.log(res.HeWeather6[0]);
+            console.log('体感温度:', now.fl);
+            console.log('天气实况:', now.cond_txt);
+            console.log('降水量:', now.pcpn);
+            console.log('云量:', now.cloud);
+            console.log('风力:', now.wind_sc);
+        });
+</script>
+</body>
+</html>
