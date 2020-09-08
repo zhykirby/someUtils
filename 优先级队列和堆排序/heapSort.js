@@ -39,3 +39,75 @@ function heapSort (arr) {
     }
     return arr;
 }
+// ========================================================
+// heap sort 优化
+
+const isEqual = (value, compareValue) => {
+    const valueType = typeof value;
+    const compareValueType = typeof compareValue;
+    const easyCompare = ['string', 'number', 'boolean'];
+    const noCompare = ['undefined', 'null'];
+    if (valueType !== compareValueType || noCompare.includes(valueType) || noCompare.includes(compareValueType)) return false; // 不建议这么写
+    if (easyCompare.includes(valueType)) return value === compareValue;
+    // object && function 不写了
+};
+
+const swap = (arr, index, changeIndex) => {
+    const temp = arr[index];
+    arr[index] = arr[changeIndex];
+    arr[changeIndex] = temp;
+    return arr;
+};
+
+const getLargestIndex = (arr, len, index) => {
+    // 🌲的👈和👉 这样打注释感觉会被打
+    const left = 2 * index + 1;
+    const right = 2 * index + 2;
+    // 没超出长度，且确实比当前节点大，换位
+    if (left < len && arr[left] > arr[index]) {
+        return left;
+    }
+    if (right < len && arr[right] > arr[index]) {
+        return right;
+    }
+    return index;
+};
+
+// 大顶化
+const heapify = (arr, index) => {
+    const len = arr.length;
+    const largestIndex = getLargestIndex(arr, len, index);
+    // 将较大的换上来后，继续大顶化
+    return !isEqual(index, largestIndex) ? swapAndHeapify(arr, index, largestIndex) : arr;
+};
+
+const swapAndHeapify = (arr, index, largest) => {
+    swap(arr, index, largest);
+    heapify(arr, largest);
+    return arr;
+};
+
+const heapSort = (arr, index) => {
+    arr = swapAndHeapify(arr, 0, index);
+    index--;
+    if (index > 0) {
+        return heapSort(arr, 0, index);
+    }
+    return arr;
+};
+
+// 构建堆 堆的数据结构就行
+const buildHeap = (arr, len) => {
+    for (let i = Math.floor(len / 2);i > 0;i--) {
+        arr = heapify(arr, i);
+    }
+    return arr;
+}
+
+const entry = arr => {
+    const len = arr.length;
+    if (len === 0) return arr;
+    buildHeap(arr, len);
+    heapSort(arr, len - 1);
+    return arr;
+};
