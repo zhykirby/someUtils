@@ -65,41 +65,39 @@ const getLargestIndex = (arr, len, index) => {
     const right = 2 * index + 2;
     // 没超出长度，且确实比当前节点大，换位
     if (left < len && arr[left] > arr[index]) {
-        return left;
+        index = left;
     }
     if (right < len && arr[right] > arr[index]) {
-        return right;
+        index = right;
     }
     return index;
 };
 
 // 大顶化
-const heapify = (arr, index) => {
-    const len = arr.length;
+const heapify = (arr, index, len) => {
     const largestIndex = getLargestIndex(arr, len, index);
     // 将较大的换上来后，继续大顶化
-    return !isEqual(index, largestIndex) ? swapAndHeapify(arr, index, largestIndex) : arr;
-};
-
-const swapAndHeapify = (arr, index, largest) => {
-    swap(arr, index, largest);
-    heapify(arr, largest);
+    if (!isEqual(index, largestIndex)) {
+        swap(arr, index, largestIndex);
+        return heapify(arr, index, len);
+    }
     return arr;
+    // return !isEqual(index, largestIndex) ? swapAndHeapify(arr, index, largestIndex) : arr;
 };
 
 const heapSort = (arr, index) => {
-    arr = swapAndHeapify(arr, 0, index);
-    index--;
-    if (index > 0) {
-        return heapSort(arr, 0, index);
+    for (let i = index;i > 0;i--) {
+        // 将大的换到最后
+        swap(arr, 0, i);
+        heapify(arr, 0, i);
     }
     return arr;
 };
 
 // 构建堆 堆的数据结构就行
 const buildHeap = (arr, len) => {
-    for (let i = Math.floor(len / 2);i > 0;i--) {
-        arr = heapify(arr, i);
+    for (let i = Math.floor(len / 2 - 1);i > 0;i--) {
+        arr = heapify(arr, i, len);
     }
     return arr;
 }
@@ -111,3 +109,4 @@ const entry = arr => {
     heapSort(arr, len - 1);
     return arr;
 };
+
